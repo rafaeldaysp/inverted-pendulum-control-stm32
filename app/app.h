@@ -8,9 +8,9 @@
 #ifndef APP_H_
 #define APP_H_
 
-void Encoder_Callback_Handler(uint32_t Encoder_Timer_Number, uint32_t Count);
-void app_setup();
-void app_loop();
+void app_uart_rx_callback(void);
+void app_setup(void);
+void app_loop(void);
 
 
 #endif /* APP_H_ */
