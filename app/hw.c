@@ -12,7 +12,6 @@
 extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
-extern UART_HandleTypeDef huart1;
 
 void hw_pwm_start(uint8_t timer_number, uint8_t channel){
 	if (timer_number == 1){
@@ -31,15 +30,6 @@ uint32_t hw_get_encoder_count(uint8_t encoder_number){
 	return 0;
 }
 
-void hw_uart_receive_dma(uint8_t uart_number, uint8_t *buffer, uint16_t size){
-	if (uart_number == 1) HAL_UART_Receive_DMA(&huart1, buffer, size);
-}
-
-void hw_uart_transmit_it(uint8_t uart_number, uint8_t *buffer, uint16_t size_data){
-	if(uart_number == 1) HAL_UART_Transmit_IT(&huart1, buffer, size_data);
-}
-
-
 void hw_set_pwm_dutycycle(uint8_t timer_number, uint32_t channel, uint32_t Dutycyle){
 	if (timer_number == 1){
 			if (channel == 1) TIM1->CCR1 = Dutycyle;
@@ -48,8 +38,4 @@ void hw_set_pwm_dutycycle(uint8_t timer_number, uint32_t channel, uint32_t Dutyc
 }
 uint32_t hw_get_elapsed_time(void){
   return HAL_GetTick();
-}
-
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-	app_uart_rx_callback();
 }
